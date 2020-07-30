@@ -41,8 +41,7 @@ def Parse_main(url,class_name='sections_letter-brands'):
 
 def Parse_model(url,Name=None,path_out='VecityRu.txt'):
     names,urls=Parse_main(url_default+url,'page_model-ranges')
-    fl=open(path_out,mode='a',encoding='utf8')
-    fl.write("name;model;\n")
+    fl = open(path_out, mode='a', encoding='utf8')
     for name in names:
         fl.write(Name+';'+name+';\n')
     fl.close()
@@ -51,10 +50,13 @@ def Parse_model(url,Name=None,path_out='VecityRu.txt'):
 
 #print(Parse_main(url_site_main))
 #print(Parse_model('https://auto.vercity.ru/catalog/auto/avanti/'))
-def Parse_all(url):
+def Parse_all(url,path_out='VecityRu.txt'):
     Names,Urls=Parse_main(url)
+    fl = open(path_out, mode='a', encoding='utf8')
+    fl.write("name;model;\n")
     for i in range(len(Names)):
-        Parse_model(url=Urls[i],Name=Names[i])
+        Parse_model(url=Urls[i],Name=Names[i],path_out=path_out)
+
 
 
 Parse_all(url_site_main)
