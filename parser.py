@@ -39,13 +39,22 @@ def Parse_main(url,class_name='sections_letter-brands'):
 
     return Names, Refs
 
-def Parse_model(url,Name=None,path_out=None):
-    #resp = req.get(url_default+url, verify=False)
-    #soup = BeautifulSoup(resp.content, 'html.parser')
-    #list_models=soup.find_all('ul',{'class':'page_model-ranges'})
-    #fl=open(path_out,mode='a',encoding='utf8')
-    print(Parse_main(url,'page_model-ranges'))
+def Parse_model(url,Name=None,path_out='VecityRu.txt'):
+    names,urls=Parse_main(url_default+url,'page_model-ranges')
+    fl=open(path_out,mode='a',encoding='utf8')
+    fl.write("name;model;\n")
+    for name in names:
+        fl.write(Name+';'+name+';\n')
+    fl.close()
 
 
-print(Parse_main(url_site_main))
-print(Parse_model('https://auto.vercity.ru/catalog/auto/avanti/'))
+
+#print(Parse_main(url_site_main))
+#print(Parse_model('https://auto.vercity.ru/catalog/auto/avanti/'))
+def Parse_all(url):
+    Names,Urls=Parse_main(url)
+    for i in range(len(Names)):
+        Parse_model(url=Urls[i],Name=Names[i])
+
+
+Parse_all(url_site_main)
